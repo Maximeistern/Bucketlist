@@ -1,4 +1,10 @@
 package com.example.bucketlistapp.views;
 
-public class ToDoForm {
+import com.vaadin.flow.component.formlayout.FormLayout;
+
+public class ToDoForm extends FormLayout {
+
+    public ToDoForm(){
+
+    }
 }
