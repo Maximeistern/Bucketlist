@@ -17,6 +17,10 @@ public class ToDoService {
         return toDoRepo.findAll();
     }
 
+    public List<ToDo> findByAppUser_Username(String username){
+        return toDoRepo.findByAppUser_Username(username);
+    }
+
     public ToDo createToDo(ToDo toDo){
         return toDoRepo.save(toDo);
     }

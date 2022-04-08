@@ -16,8 +16,7 @@ public class ToDo {
     @JoinColumn(name = "appUser_id")
     private AppUser appUser;
 
-    public ToDo(int id, String text, AppUser appUser) {
-        this.id = id;
+    public ToDo(String text, AppUser appUser) {
         this.text = text;
         this.appUser = appUser;
     }

@@ -32,13 +32,12 @@ public class AppUser {
     @JsonIgnore
     private Set<ToDo> toDoSet;
 
-    public AppUser(String username, String password, String firstName, String lastName, String email, Set<ToDo> toDoSet) {
+    public AppUser(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.toDoSet = toDoSet;
     }
 
     public AppUser() {
@@ -84,11 +83,4 @@ public class AppUser {
         this.email = email;
     }
 
-    public Set<ToDo> getToDoSet() {
-        return toDoSet;
-    }
-
-    public void setToDoSet(Set<ToDo> toDoSet) {
-        this.toDoSet = toDoSet;
-    }
 }

@@ -9,7 +9,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route("/login"/*, layout = MainLayout.class*/)
-@PageTitle("Logga in din råtta")
+@PageTitle("Logga in")
 public class LoginView extends Div implements BeforeEnterObserver {
 
 
