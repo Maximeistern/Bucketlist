@@ -1,6 +1,7 @@
 package com.example.bucketlistapp.enteties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ToDo {
@@ -10,14 +11,16 @@ public class ToDo {
     private int id;
 
     @Column
-    private String text;
+    @NotNull
+    private String dream;
 
     @ManyToOne
     @JoinColumn(name = "appUser_id")
+    @NotNull
     private AppUser appUser;
 
-    public ToDo(String text, AppUser appUser) {
-        this.text = text;
+    public ToDo(String dream, AppUser appUser) {
+        this.dream = dream;
         this.appUser = appUser;
     }
 
@@ -32,12 +35,12 @@ public class ToDo {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getDream() {
+        return dream;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setDream(String dream) {
+        this.dream = dream;
     }
 
     public AppUser getAppUser() {

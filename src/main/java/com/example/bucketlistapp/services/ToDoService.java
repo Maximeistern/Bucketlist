@@ -32,7 +32,7 @@ public class ToDoService {
     public ToDo updateById(int id, ToDo newToDo){
         ToDo oldToDo = toDoRepo.findById(id).orElseThrow();
 
-        oldToDo.setText(newToDo.getText());
+        oldToDo.setDream(newToDo.getDream());
 
         return toDoRepo.save(oldToDo);
     }
