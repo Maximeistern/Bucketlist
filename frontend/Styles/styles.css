@@ -1,0 +1,8 @@
+.navbarLayout {
+    background-image: url("frontend/img/img2.png");
+    background-position: left;
+    background-size: cover;
+    display: flex;
+    height: 100px;
+    /*background: green;*/
+}

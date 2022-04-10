@@ -3,7 +3,10 @@ package com.example.bucketlistapp.views;
 import com.example.bucketlistapp.enteties.ToDo;
 import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,28 +19,27 @@ public class ManageTodoView extends VerticalLayout {
     public ManageTodoView(ToDoService toDoService){
         this.toDoService = toDoService;
         toDoForm = new ToDoForm(toDoService, this);
+
         grid.setItems(toDoService.findByAppUser_Username("Maximeistern"));
 
-
         grid.addColumn(ToDo::getDream).setHeader("Dream");
-        grid.addComponentColumn(toDo -> {
 
-            Button editButton = new Button("Edit", evt -> {
-                grid.asSingleSelect().addValueChangeListener(ev -> {
-                    toDoForm.setTodo(ev.getValue());
-                });
-                updateList();
+        grid.addComponentColumn(toDo -> {
+            Button editButton = new Button(new Icon(VaadinIcon.PENCIL),evt -> {
+                Dialog dialog = new Dialog();
+                ToDoForm toDoForm = new ToDoForm(toDoService, this);
+                toDoForm.setTodo(toDo);
+                dialog.add(toDoForm);
+                dialog.open();
+                updateItem();
             });
-            Button deleteButton = new Button("Delete", evt -> {
+            Button deleteButton = new Button(new Icon(VaadinIcon.CLOSE_SMALL), evt -> {
                 toDoService.deleteById(toDo.getId());
                 updateItem();
             });
             return new HorizontalLayout(editButton,deleteButton);
 
         });
-        /*grid.asSingleSelect().addValueChangeListener(evt -> {
-            ToDoForm
-        })*/
         add(grid);
     }
     private void updateList() {
@@ -45,6 +47,6 @@ public class ManageTodoView extends VerticalLayout {
     }
 
     public void updateItem() {
-        grid.setItems(toDoService.findAll());
+        grid.setItems(toDoService.findByAppUser_Username("Maximeistern"));
     }
 }

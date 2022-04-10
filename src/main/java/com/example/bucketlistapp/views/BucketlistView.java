@@ -5,19 +5,23 @@ import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.component.html.Image;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.tools.Diagnostic;
 import java.awt.*;
 import java.util.List;
 
+@CssImport("./Styles/styles.css")
 @Route("")
 public class BucketlistView extends VerticalLayout {
 
@@ -65,7 +69,14 @@ public class BucketlistView extends VerticalLayout {
     private void loadNavbar() {
         Button logoutButton = new Button("Logout"/*, evt -> PrincipalUtils.logout()*/);
         logoutButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        navbarLayout.add(logoutButton);
+        Image logo = new Image("src/main/java/com/example/bucketlistapp/views/BucketlistView.java", "Logo");
+        navbarLayout.addClassName("navbarLayout");
+        navbarLayout.setWidthFull();
+        navbarLayout.setMargin(true);
+        navbarLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
+        navbarLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+        navbarLayout.add(logo, logoutButton);
     }
 
     private void loadProgressbar() {
