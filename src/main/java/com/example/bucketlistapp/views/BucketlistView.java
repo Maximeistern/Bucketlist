@@ -13,7 +13,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.Route;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.tools.Diagnostic;
 import java.awt.*;
@@ -26,12 +25,13 @@ public class BucketlistView extends VerticalLayout {
     H1 header = new H1("Your Bucketlist Dreams");
     ProgressBar progressBar = new ProgressBar();
     Div progressBarLabel = new Div();
-    //ManageTodoView manageTodoView = new ManageTodoView(todoService);
+    ManageTodoView manageTodoView;
     HorizontalLayout navbarLayout = new HorizontalLayout();
     HorizontalLayout buttonLayout = new HorizontalLayout();
 
     public BucketlistView(ToDoService toDoService){
         this.todoService = toDoService;
+        this.manageTodoView = new ManageTodoView(toDoService);
         setAlignItems(Alignment.CENTER);
 
         loadNavbar();
@@ -43,22 +43,22 @@ public class BucketlistView extends VerticalLayout {
         add(navbarLayout, header, progressBarLabel, progressBar, buttonLayout, new Hr());
 
         todoService.findByAppUser_Username("Maximeistern").forEach(toDo -> {
-            H3 title = new H3(toDo.getText());
+            H3 title = new H3(toDo.getDream());
             add(title, new Hr());
         });
     }
 
     private void loadButtonLayout() {
-        Button createTodoButton = new Button("New Dream")/*, buttonClickEvent -> {
+        Button createTodoButton = new Button("New Dream", buttonClickEvent -> {
             Dialog dialog = new Dialog();
             ToDoForm toDoForm = new ToDoForm(todoService, manageTodoView);
             toDoForm.setTodo(new ToDo());
             dialog.add(toDoForm);
             dialog.open();
-        })*/;
-        Button manageTodoButton = new Button("Manage dreams")/*, buttonClickEvent -> {
+        });
+        Button manageTodoButton = new Button("Manage dreams", buttonClickEvent -> {
             UI.getCurrent().navigate(ManageTodoView.class);
-        })*/;
+        });
         buttonLayout.add(createTodoButton, manageTodoButton);
     }
 

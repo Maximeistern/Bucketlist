@@ -8,18 +8,18 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
-import java.awt.*;
-
 public class ToDoForm extends FormLayout {
-/*
+
     TextField dream = new TextField("Dream");
     Button saveButton = new Button("Save");
 
     Binder<ToDo> binder = new BeanValidationBinder<>(ToDo.class);
     ToDoService toDoService;
+    ManageTodoView manageTodoView;
 
     public ToDoForm(ToDoService toDoService, ManageTodoView manageTodoView){
         this.toDoService = toDoService;
+        this.manageTodoView = manageTodoView;
         setVisible(false);
         binder.bindInstanceFields(this);
 
@@ -36,6 +36,7 @@ public class ToDoForm extends FormLayout {
             toDoService.createToDo(toDo);
         }
         setTodo(null);
+        manageTodoView.updateItem();
     }
 
     void setTodo(ToDo todo) {
@@ -45,5 +46,5 @@ public class ToDoForm extends FormLayout {
         }else{
             setVisible(false);
         }
-    }*/
+    }
 }

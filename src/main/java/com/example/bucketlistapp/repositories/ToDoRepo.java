@@ -1,6 +1,5 @@
 package com.example.bucketlistapp.repositories;
 
-import com.example.bucketlistapp.enteties.AppUser;
 import com.example.bucketlistapp.enteties.ToDo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
