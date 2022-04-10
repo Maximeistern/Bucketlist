@@ -8,9 +8,13 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+import javax.management.Notification;
+
 @Route("/managetodo")
 public class ManageTodoView extends VerticalLayout {
     Grid<ToDo> grid = new Grid<>(ToDo.class, false);
+
+
     public ManageTodoView(ToDoService toDoService){
 
         grid.setItems(toDoService.findAll());
