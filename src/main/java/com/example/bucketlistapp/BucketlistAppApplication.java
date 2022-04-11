@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class BucketlistAppApplication implements CommandLineRunner {
     @Autowired
     ToDoRepo todoRepo;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public static void main(String[] args) {
         SpringApplication.run(BucketlistAppApplication.class, args);
     }
@@ -27,8 +31,8 @@ public class BucketlistAppApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        AppUser Max = new AppUser("Maximeistern", "max", "Max", "Stolpe", "maxstolpe@mail.com");
-        AppUser Malin = new AppUser("MalinOnBucketlistDreams", "malin","Malin", "Eriksson", "malineriksson@mail.com");
+        AppUser Max = new AppUser("Maximeistern", passwordEncoder.encode("max"), "Max", "Stolpe", "maxstolpe@mail.com");
+        AppUser Malin = new AppUser("MalinOnBucketlistDreams", passwordEncoder.encode("malin"),"Malin", "Eriksson", "malineriksson@mail.com");
         appUserRepo.saveAll(List.of(
                 Max, Malin
         ));

@@ -1,6 +1,7 @@
 package com.example.bucketlistapp.views;
 
 import com.example.bucketlistapp.enteties.ToDo;
+import com.example.bucketlistapp.security.PrincipalUtils;
 import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -16,13 +17,16 @@ import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.html.Image;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.annotation.security.PermitAll;
 import javax.tools.Diagnostic;
 import java.awt.*;
 import java.util.List;
 
 @CssImport("./Styles/styles.css")
 @Route("")
+@PermitAll
 public class BucketlistView extends VerticalLayout {
 
     ToDoService todoService;
@@ -67,7 +71,7 @@ public class BucketlistView extends VerticalLayout {
     }
 
     private void loadNavbar() {
-        Button logoutButton = new Button("Logout"/*, evt -> PrincipalUtils.logout()*/);
+        Button logoutButton = new Button("Logout", evt -> PrincipalUtils.logout());
         logoutButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         Image logo = new Image("src/main/java/com/example/bucketlistapp/views/BucketlistView.java", "Logo");
         navbarLayout.addClassName("navbarLayout");

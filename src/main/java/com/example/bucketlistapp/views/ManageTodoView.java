@@ -11,7 +11,10 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
+
 @Route("/managetodo")
+@PermitAll
 public class ManageTodoView extends VerticalLayout {
     Grid<ToDo> grid = new Grid<>(ToDo.class, false);
     ToDoService toDoService;
@@ -19,6 +22,8 @@ public class ManageTodoView extends VerticalLayout {
     public ManageTodoView(ToDoService toDoService){
         this.toDoService = toDoService;
         toDoForm = new ToDoForm(toDoService, this);
+        //setAlignItems(Alignment.CENTER);
+
 
         grid.setItems(toDoService.findByAppUser_Username("Maximeistern"));
 
