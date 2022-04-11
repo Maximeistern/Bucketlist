@@ -1,8 +1,10 @@
 .navbarLayout {
-    background-image: url("frontend/img/img2.png");
-    background-position: left;
+    background-image: url("./frontend/img/logo_bucketlistDreams.jpg");
+    /*background-position: left;*/
+    background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
+    /*background-color: green;*/
+    /*display: flex;*/
     height: 100px;
-    /*background: green;*/
+    margin: 0;
 }

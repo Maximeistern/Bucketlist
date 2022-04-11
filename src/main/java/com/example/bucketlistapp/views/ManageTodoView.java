@@ -1,7 +1,9 @@
 package com.example.bucketlistapp.views;
 
 import com.example.bucketlistapp.enteties.ToDo;
+import com.example.bucketlistapp.security.PrincipalUtils;
 import com.example.bucketlistapp.services.ToDoService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
@@ -23,9 +25,12 @@ public class ManageTodoView extends VerticalLayout {
         this.toDoService = toDoService;
         toDoForm = new ToDoForm(toDoService, this);
         //setAlignItems(Alignment.CENTER);
+        Button backButton = new Button("Back to dreams", evt -> {
+            UI.getCurrent().navigate(BucketlistView.class);
+        });
 
 
-        grid.setItems(toDoService.findByAppUser_Username("Maximeistern"));
+        grid.setItems(toDoService.findByAppUser_Username(PrincipalUtils.getName()));
 
         grid.addColumn(ToDo::getDream).setHeader("Dream");
 
@@ -45,13 +50,13 @@ public class ManageTodoView extends VerticalLayout {
             return new HorizontalLayout(editButton,deleteButton);
 
         });
-        add(grid);
+        add(backButton, grid);
     }
     private void updateList() {
 
     }
 
     public void updateItem() {
-        grid.setItems(toDoService.findByAppUser_Username("Maximeistern"));
+        grid.setItems(toDoService.findByAppUser_Username(PrincipalUtils.getName()));
     }
 }

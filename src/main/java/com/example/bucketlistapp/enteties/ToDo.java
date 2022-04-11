@@ -14,6 +14,8 @@ public class ToDo {
     @NotNull
     private String dream;
 
+    private boolean done;
+
     @ManyToOne
     @JoinColumn(name = "appUser_id")
     @NotNull
@@ -22,6 +24,7 @@ public class ToDo {
     public ToDo(String dream, AppUser appUser) {
         this.dream = dream;
         this.appUser = appUser;
+        this.done = false;
     }
 
     public ToDo() {
@@ -49,6 +52,14 @@ public class ToDo {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+
+   public boolean isDone() {
+        return this.done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
 

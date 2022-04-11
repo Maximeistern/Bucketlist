@@ -2,6 +2,8 @@ package com.example.bucketlistapp.views;
 
 import com.example.bucketlistapp.enteties.ToDo;
 import com.example.bucketlistapp.services.ToDoService;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.component.button.Button;
@@ -34,9 +36,16 @@ public class ToDoForm extends FormLayout {
             toDoService.updateById(toDo.getId(), toDo);
         }else {
             toDoService.createToDo(toDo);
+            UI.getCurrent().navigate(BucketlistView.class);
         }
         setTodo(null);
         manageTodoView.updateItem();
+
+        this.getParent().ifPresent(component -> {
+            if(component instanceof Dialog){
+                ((Dialog) component).close();
+            }
+        });
     }
 
     void setTodo(ToDo todo) {
