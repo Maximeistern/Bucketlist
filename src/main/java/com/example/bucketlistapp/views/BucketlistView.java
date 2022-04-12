@@ -10,6 +10,8 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -42,6 +44,7 @@ public class BucketlistView extends VerticalLayout {
         this.principalUtils = principalUtils;
         this.todoService = toDoService;
         this.manageTodoView = new ManageTodoView(toDoService);
+
         setAlignItems(Alignment.CENTER);
 
         loadNavbar();
@@ -58,26 +61,20 @@ public class BucketlistView extends VerticalLayout {
     private void renderDreams(){
         todoService.findByAppUser_Username(PrincipalUtils.getName()).forEach(toDo -> {
             VerticalLayout dreams = new VerticalLayout();
+            Button done = new Button("Done", evt -> {
+                toDo.setDone(true);
+                todoService.setDone(toDo);
+                updateDream();
+            });
+            Button notDone = new Button("Not done", evt -> {
+                toDo.setDone(false);
+                todoService.setDone(toDo);
+                updateDream();
+            });
             dreams.setAlignItems(Alignment.CENTER);
             H2 title = new H2(toDo.getDream());
-            Button knapp = new Button("Check", buttonClickEvent -> {
-                Dialog dialog = new Dialog();
-                Button done = new Button("Done", evt -> {
-                    toDo.setDone(true);
-                    todoService.setDone(toDo);
-                    dialog.close();
-                    updateDream();
-                });
-                Button no = new Button("Not done", evt -> {
-                    toDo.setDone(false);
-                    todoService.setDone(toDo);
-                    dialog.close();
-                    updateDream();
-                });
-                dialog.add(done, no);
-                dialog.open();
-            });
-            dreams.add(title, knapp, new Hr());
+
+            dreams.add(title,toDo.isDone() ? notDone : done, new Hr());
             dreams.addClassName("dreamCard");
             add(dreams);
         });
@@ -98,6 +95,8 @@ public class BucketlistView extends VerticalLayout {
             toDo.setAppUser(principalUtils.getAppuserPrincipalUtils());
             toDoForm.setTodo(toDo);
             dialog.add(toDoForm);
+            dialog.setModal(false);
+            dialog.setDraggable(true);
             dialog.open();
         });
         Button manageDreamButton = new Button("Manage dreams", buttonClickEvent -> {
@@ -107,7 +106,7 @@ public class BucketlistView extends VerticalLayout {
     }
 
     private void loadNavbar() {
-        Button logoutButton = new Button("Logout", evt -> PrincipalUtils.logout());
+        Button logoutButton = new Button("Logout", new Icon(VaadinIcon.EXIT), evt -> PrincipalUtils.logout());
         logoutButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         Image logo = new Image("./src/main/java/com/example/bucketlistapp/views/BucketlistView.java", "Logo");
         navbarLayout.addClassName("navbarLayout");
