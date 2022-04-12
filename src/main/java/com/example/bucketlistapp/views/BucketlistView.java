@@ -16,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.html.Image;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import java.util.List;
 
 @CssImport("./Styles/styles.css")
 @Route("")
+@PageTitle("BucketlistDreams || Dreams")
 @PermitAll
 public class BucketlistView extends VerticalLayout {
 
@@ -61,21 +63,16 @@ public class BucketlistView extends VerticalLayout {
     private void renderDreams(){
         todoService.findByAppUser_Username(PrincipalUtils.getName()).forEach(toDo -> {
             VerticalLayout dreams = new VerticalLayout();
-            Button done = new Button("Done", evt -> {
-                toDo.setDone(true);
-                todoService.setDone(toDo);
-                updateDream();
-            });
-            Button notDone = new Button("Not done", evt -> {
-                toDo.setDone(false);
-                todoService.setDone(toDo);
-                updateDream();
-            });
             dreams.setAlignItems(Alignment.CENTER);
             H2 title = new H2(toDo.getDream());
 
-            dreams.add(title,toDo.isDone() ? notDone : done, new Hr());
+            dreams.add(title, new Hr());
             dreams.addClassName("dreamCard");
+            dreams.addClickListener(evt -> {
+                toDo.setDone(!toDo.isDone());
+                todoService.setDone(toDo);
+                updateDream();
+            });
             add(dreams);
         });
     }
@@ -123,6 +120,9 @@ public class BucketlistView extends VerticalLayout {
         List<ToDo> checkedTodoList = userTodoList.stream().filter(ToDo::isDone).toList();
         progressBarLabel.setText("Dreams fulfilled ("+ checkedTodoList.toArray().length +"/" + userTodoList.toArray().length +")");
         progressBar.setValue((double) checkedTodoList.toArray().length/userTodoList.toArray().length);
+        if(progressBar.getValue()==1){
+            progressBarLabel.setText("Fulfilled all of your dreams");
+        }
     }
 
 }

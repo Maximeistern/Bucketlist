@@ -11,11 +11,13 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import javax.annotation.security.PermitAll;
 
 @Route("/managetodo")
+@PageTitle("BucketlistDreams || ManageDreams")
 @PermitAll
 public class ManageTodoView extends VerticalLayout {
     Grid<ToDo> grid = new Grid<>(ToDo.class, false);

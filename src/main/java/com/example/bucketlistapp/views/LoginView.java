@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("/login"/*, layout = MainLayout.class*/)
-@PageTitle("Logga in")
+@PageTitle("Loggin")
 @AnonymousAllowed
 public class LoginView extends Div implements BeforeEnterObserver {
 

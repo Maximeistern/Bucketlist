@@ -34,7 +34,7 @@ public class ToDoForm extends FormLayout {
         ToDo toDo = binder.validate().getBinder().getBean();
         if(toDo.getId() != 0){
             toDoService.updateById(toDo.getId(), toDo);
-        }else {
+        }else if(toDo.getDream() != ""){
             toDoService.createToDo(toDo);
             UI.getCurrent().getPage().reload();
         }
