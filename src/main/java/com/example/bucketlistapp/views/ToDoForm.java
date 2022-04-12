@@ -36,7 +36,7 @@ public class ToDoForm extends FormLayout {
             toDoService.updateById(toDo.getId(), toDo);
         }else {
             toDoService.createToDo(toDo);
-            UI.getCurrent().navigate(BucketlistView.class);
+
         }
         setTodo(null);
         manageTodoView.updateItem();

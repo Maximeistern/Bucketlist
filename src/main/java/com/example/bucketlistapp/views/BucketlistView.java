@@ -52,29 +52,43 @@ public class BucketlistView extends VerticalLayout {
 
         add(navbarLayout, header, progressBarLabel, progressBar, buttonLayout, new Hr());
 
+        renderDreams();
+    }
 
+    private void renderDreams(){
         todoService.findByAppUser_Username(PrincipalUtils.getName()).forEach(toDo -> {
+            VerticalLayout dreams = new VerticalLayout();
+            dreams.setAlignItems(Alignment.CENTER);
             H3 title = new H3(toDo.getDream());
             Button knapp = new Button("byta", buttonClickEvent -> {
                 Dialog dialog = new Dialog();
                 Button done = new Button("Done", evt -> {
                     toDo.setDone(true);
-                    System.out.println(toDo.isDone());
+                    todoService.setDone(toDo);
                     dialog.close();
-                    UI.getCurrent().navigate(BucketlistView.class);
+                    updateDream();
                 });
                 Button no = new Button("Not done", evt -> {
                     toDo.setDone(false);
+                    todoService.setDone(toDo);
                     dialog.close();
-                    UI.getCurrent().navigate(BucketlistView.class);
+                    updateDream();
                 });
                 dialog.add(done, no);
                 dialog.open();
             });
             H3 done = new H3(String.valueOf(toDo.isDone()));
-            add(title, knapp, done, new Hr());
+            dreams.add(title, knapp, done, new Hr());
+            dreams.addClassName("dreamCard");
+            add(dreams);
         });
+    }
 
+    private void updateDream() {
+        this.getChildren().filter(x -> x.getElement().getClassList().contains("dreamCard"))
+                .forEach(this::remove);
+        loadProgressbar();
+        renderDreams();
     }
 
     private void loadButtonLayout() {

@@ -29,6 +29,10 @@ public class ToDoService {
         toDoRepo.deleteById(id);
     }
 
+    public ToDo setDone(ToDo todo){
+        return toDoRepo.save(todo);
+    }
+
     public ToDo updateById(int id, ToDo newToDo){
         ToDo oldToDo = toDoRepo.findById(id).orElseThrow();
 
