@@ -59,8 +59,8 @@ public class BucketlistView extends VerticalLayout {
         todoService.findByAppUser_Username(PrincipalUtils.getName()).forEach(toDo -> {
             VerticalLayout dreams = new VerticalLayout();
             dreams.setAlignItems(Alignment.CENTER);
-            H3 title = new H3(toDo.getDream());
-            Button knapp = new Button("byta", buttonClickEvent -> {
+            H2 title = new H2(toDo.getDream());
+            Button knapp = new Button("Check", buttonClickEvent -> {
                 Dialog dialog = new Dialog();
                 Button done = new Button("Done", evt -> {
                     toDo.setDone(true);
@@ -77,8 +77,7 @@ public class BucketlistView extends VerticalLayout {
                 dialog.add(done, no);
                 dialog.open();
             });
-            H3 done = new H3(String.valueOf(toDo.isDone()));
-            dreams.add(title, knapp, done, new Hr());
+            dreams.add(title, knapp, new Hr());
             dreams.addClassName("dreamCard");
             add(dreams);
         });
