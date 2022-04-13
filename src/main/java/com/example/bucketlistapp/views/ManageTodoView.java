@@ -33,6 +33,7 @@ public class ManageTodoView extends VerticalLayout {
         Button backButton = new Button("Back to dreams", evt -> {
             UI.getCurrent().navigate(BucketlistView.class);
         });
+        backButton.addClassName("backButton");
 
 
         grid.setItems(toDoService.findByAppUser_Username(PrincipalUtils.getName()));

@@ -14,6 +14,7 @@ public class ToDo {
     @NotNull
     private String dream;
 
+    @Column
     private boolean done;
 
     @ManyToOne

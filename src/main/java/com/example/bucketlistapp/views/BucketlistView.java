@@ -70,14 +70,26 @@ public class BucketlistView extends VerticalLayout {
             VerticalLayout dreams = new VerticalLayout();
             dreams.setAlignItems(Alignment.CENTER);
             H2 title = new H2(toDo.getDream());
-
+            dreams.setClassName("dreamCard-true", toDo.isDone());
+            dreams.setClassName("dreamCard", !toDo.isDone());
 
             dreams.add(title);
-            dreams.addClassName("dreamCard");
             dreams.addClickListener(evt -> {
+
                 toDo.setDone(!toDo.isDone());
                 todoService.setDone(toDo);
+                dreams.setClassName("dreamCard-true", toDo.isDone());
+                dreams.setClassName("dreamCard", !toDo.isDone());
+                /*if (toDo.isDone()) {
+
+                    updateDream();
+                }
+                else if(!toDo.isDone()) {
+
+                    updateDream();
+                }*/
                 updateDream();
+
             });
             add(dreams);
         });
@@ -85,6 +97,8 @@ public class BucketlistView extends VerticalLayout {
 
     private void updateDream() {
         this.getChildren().filter(x -> x.getElement().getClassList().contains("dreamCard"))
+                .forEach(this::remove);
+        this.getChildren().filter(x -> x.getElement().getClassList().contains("dreamCard-true"))
                 .forEach(this::remove);
         loadProgressbar();
         renderDreams();
@@ -106,19 +120,24 @@ public class BucketlistView extends VerticalLayout {
         Button manageDreamButton = new Button("Manage dreams", buttonClickEvent -> {
             UI.getCurrent().navigate(ManageTodoView.class);
         });
+        createDreamButton.addClassName("createButton");
+        manageDreamButton.addClassName("manageButton");
         buttonLayout.add(createDreamButton, manageDreamButton);
     }
 
     private void loadNavbar() {
         Button logoutButton = new Button("Logout", new Icon(VaadinIcon.EXIT), evt -> PrincipalUtils.logout());
-        /*Image logo = new Image("./src/main/java/com/example/bucketlistapp/image/logo_bucketlistDreams.jpg", "Logo");*/
+        /*Image logo = new Image("../../../frontend/img/logo_bucketlistDreams.jpg", "logo");*/
+       /* logo.addClassName("imageLogo");*/
+        H2 titleNavbar = new H2("Bucketlist dreams");
+        titleNavbar.addClassName("titleNavbar");
         navbarLayout.addClassName("navbarLayout");
-        navbarLayout.setWidthFull();
+ /*       navbarLayout.setWidthFull();
         navbarLayout.setMargin(true);
         navbarLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
-        navbarLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-        navbarLayout.add(/*logo,*/ logoutButton);
+        navbarLayout.setAlignItems(FlexComponent.Alignment.CENTER);*/
+logoutButton.addClassName("logoutButton");
+        navbarLayout.add(/*logo,*/titleNavbar, logoutButton);
     }
 
     private void loadProgressbar() {

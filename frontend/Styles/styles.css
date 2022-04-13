@@ -1,8 +1,10 @@
 /*-----------Standard CSS------------*/
 
 html{
-    --lumo-primary-color: hsl(260, 100%, 20%);
+    --lumo-primary-color: hsl(240, 51%, 15%);
     background-image: linear-gradient(#b5b5c5, #5e5864, lightgrey);
+    padding: 0px;
+/*    background-image: url("frontend/img/logo_bucketlistDreams.jpg");*/
 }
 
 
@@ -10,20 +12,30 @@ html{
 /*-----------Navbar------------*/
 
 .navbarLayout {
-    background-image: url("./src/main/java/com/example/bucketlistapp/image/img2.png");
-    /*background-position: left;*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #313030;
+    background-color: #13133b;
+    align-items: center;
     display: flex;
-    height: 100px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px;
+    height: 80px;
     margin: 0;
+    border-radius: 6px;
+}
+
+.titleNavbar{
+
+    font-family: "Sofia";
+    color: honeydew;
+    align-items: center;
+    margin: 0px;
+    text-shadow: 2px 2px darkblue;
 }
 
 /*-----------Header------------*/
 .header {
     font-family: "Sofia";
-    color: white;
+    color: honeydew;
     /*background-image: linear-gradient(midnightblue, rebeccapurple, lightgrey);*/
 }
 
@@ -41,14 +53,103 @@ html{
 /*-----------DreamCard------------*/
 .dreamCard{
     background: #b9b9ce;
-    border: 2px solid #4d4d69;
- /*   border-radius: 25px;*/
+    border-radius: 25px;
+/*    font-family: "";*/
+}
 
+.dreamCard-true{
+    background-image: linear-gradient(#2f2f2f, #919194, lightgrey);
+    border-radius: 25px
+}
+.dreamCard h2{
+    margin: 0;
+}
+
+.dreamCard-true h2{
+    margin: 0;
 }
 
 .dreamCard:hover{
-    background-image: linear-gradient(midnightblue, rebeccapurple, lightgrey);
+    background-image: linear-gradient(#2f2f2f, #919194, lightgrey);
     opacity: 80%;
 
 }
+
+/*.imageLogo{
+    height: 50px;
+    width: 70px;
+}*/
+
+
+/*-----------Buttons------------*/
+
+.manageButton{
+    background-color: #13133b;
+    border: none;
+    color: white;
+    font-variant: small-caps;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.createButton{
+    background-color: #13133b;
+    border: none;
+    color: white;
+    font-variant: small-caps;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.createButton:hover{
+    opacity: 0.6;
+}
+
+.manageButton:hover{
+    opacity: 0.6;
+}
+
+.backButton{
+    background-color: #13133b;
+    border: none;
+    color: white;
+    font-variant: small-caps;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.backButton:hover{
+    opacity: 0.6;
+}
+
+.logoutButton{
+    background: honeydew;
+    color: #13133b;
+    font-variant: small-caps;
+}
+
+.logoutButton:hover{
+    background: #13133b;
+    color: honeydew;
+    border: honeydew dotted 1px;
+}
+
+
+.saveButton{
+    background-color: #13133b;
+    border: none;
+    color: white;
+    font-variant: small-caps;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
 

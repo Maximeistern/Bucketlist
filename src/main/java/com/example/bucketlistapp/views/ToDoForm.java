@@ -17,6 +17,7 @@ public class ToDoForm extends FormLayout {
     TextField dream = new TextField("Dream");
     Button saveButton = new Button("Save");
 
+
     Binder<ToDo> binder = new BeanValidationBinder<>(ToDo.class);
     ToDoService toDoService;
     ManageTodoView manageTodoView;
@@ -29,6 +30,7 @@ public class ToDoForm extends FormLayout {
 
         saveButton.addClickListener(evt -> onSave());
         dream.addClassName("newDreamFormText");
+        saveButton.addClassName("saveButton");
         add(dream, saveButton);
     }
 
