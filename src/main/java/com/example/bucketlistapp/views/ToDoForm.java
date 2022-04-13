@@ -29,7 +29,6 @@ public class ToDoForm extends FormLayout {
         binder.bindInstanceFields(this);
 
         saveButton.addClickListener(evt -> onSave());
-        dream.addClassName("newDreamFormText");
         saveButton.addClassName("saveButton");
         add(dream, saveButton);
     }

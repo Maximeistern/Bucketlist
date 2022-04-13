@@ -1,30 +1,22 @@
 package com.example.bucketlistapp.views;
 
-import com.example.bucketlistapp.enteties.AppUser;
 import com.example.bucketlistapp.enteties.ToDo;
 import com.example.bucketlistapp.security.PrincipalUtils;
 import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.component.html.Image;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.security.PermitAll;
-import javax.tools.Diagnostic;
-import java.awt.*;
 import java.util.List;
 
 @CssImport("./Styles/styles.css")
@@ -60,7 +52,7 @@ public class BucketlistView extends VerticalLayout {
 
         loadButtonLayout();
 
-        add(navbarLayout, header, progressBarLabel, progressBar, buttonLayout, new Hr());
+        add(navbarLayout, header, progressBarLabel, progressBar, buttonLayout);
 
         renderDreams();
     }
@@ -80,14 +72,6 @@ public class BucketlistView extends VerticalLayout {
                 todoService.setDone(toDo);
                 dreams.setClassName("dreamCard-true", toDo.isDone());
                 dreams.setClassName("dreamCard", !toDo.isDone());
-                /*if (toDo.isDone()) {
-
-                    updateDream();
-                }
-                else if(!toDo.isDone()) {
-
-                    updateDream();
-                }*/
                 updateDream();
 
             });
@@ -127,17 +111,12 @@ public class BucketlistView extends VerticalLayout {
 
     private void loadNavbar() {
         Button logoutButton = new Button("Logout", new Icon(VaadinIcon.EXIT), evt -> PrincipalUtils.logout());
-        /*Image logo = new Image("../../../frontend/img/logo_bucketlistDreams.jpg", "logo");*/
-       /* logo.addClassName("imageLogo");*/
+
         H2 titleNavbar = new H2("Bucketlist dreams");
         titleNavbar.addClassName("titleNavbar");
         navbarLayout.addClassName("navbarLayout");
- /*       navbarLayout.setWidthFull();
-        navbarLayout.setMargin(true);
-        navbarLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
-        navbarLayout.setAlignItems(FlexComponent.Alignment.CENTER);*/
-logoutButton.addClassName("logoutButton");
-        navbarLayout.add(/*logo,*/titleNavbar, logoutButton);
+        logoutButton.addClassName("logoutButton");
+        navbarLayout.add(titleNavbar, logoutButton);
     }
 
     private void loadProgressbar() {
