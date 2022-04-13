@@ -1,10 +1,54 @@
+/*-----------Standard CSS------------*/
+
+html{
+    --lumo-primary-color: hsl(260, 100%, 20%);
+    background-image: linear-gradient(#b5b5c5, #5e5864, lightgrey);
+}
+
+
+
+/*-----------Navbar------------*/
+
 .navbarLayout {
-    background-image: url("./frontend/img/logo_bucketlistDreams.jpg");
+    background-image: url("./src/main/java/com/example/bucketlistapp/image/img2.png");
     /*background-position: left;*/
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-color: green;*/
-    /*display: flex;*/
+    background-color: #313030;
+    display: flex;
     height: 100px;
     margin: 0;
 }
+
+/*-----------Header------------*/
+.header {
+    font-family: "Sofia";
+    color: white;
+    /*background-image: linear-gradient(midnightblue, rebeccapurple, lightgrey);*/
+}
+
+/*-----------Progressbar------------*/
+
+.progressbar{
+    background: #a598b4;
+}
+
+.progressbarLabel{
+    font-variant: small-caps;
+}
+
+
+/*-----------DreamCard------------*/
+.dreamCard{
+    background: #b9b9ce;
+    border: 2px solid #4d4d69;
+ /*   border-radius: 25px;*/
+
+}
+
+.dreamCard:hover{
+    background-image: linear-gradient(midnightblue, rebeccapurple, lightgrey);
+    opacity: 80%;
+
+}
+

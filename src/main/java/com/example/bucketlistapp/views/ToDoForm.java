@@ -3,6 +3,7 @@ package com.example.bucketlistapp.views;
 import com.example.bucketlistapp.enteties.ToDo;
 import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -10,6 +11,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
+@CssImport("./Styles/styles.css")
 public class ToDoForm extends FormLayout {
 
     TextField dream = new TextField("Dream");
@@ -26,7 +28,7 @@ public class ToDoForm extends FormLayout {
         binder.bindInstanceFields(this);
 
         saveButton.addClickListener(evt -> onSave());
-
+        dream.addClassName("newDreamFormText");
         add(dream, saveButton);
     }
 

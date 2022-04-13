@@ -1,5 +1,6 @@
 package com.example.bucketlistapp.views;
 
+import com.example.bucketlistapp.enteties.AppUser;
 import com.example.bucketlistapp.enteties.ToDo;
 import com.example.bucketlistapp.security.PrincipalUtils;
 import com.example.bucketlistapp.services.ToDoService;
@@ -19,7 +20,6 @@ import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.html.Image;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.annotation.security.PermitAll;
@@ -35,7 +35,7 @@ public class BucketlistView extends VerticalLayout {
 
     ToDoService todoService;
     PrincipalUtils principalUtils;
-    H1 header = new H1("Your Bucketlist Dreams");
+    H1 header = new H1("Your bucketlist dreams");
     ProgressBar progressBar = new ProgressBar();
     Div progressBarLabel = new Div();
     ManageTodoView manageTodoView;
@@ -46,6 +46,11 @@ public class BucketlistView extends VerticalLayout {
         this.principalUtils = principalUtils;
         this.todoService = toDoService;
         this.manageTodoView = new ManageTodoView(toDoService);
+
+        header.addClassName("header");
+        progressBar.addClassName("progressbar");
+        buttonLayout.addClassName("buttonLayoutMain");
+        progressBarLabel.addClassName("progressbarLabel");
 
         setAlignItems(Alignment.CENTER);
 
@@ -66,7 +71,8 @@ public class BucketlistView extends VerticalLayout {
             dreams.setAlignItems(Alignment.CENTER);
             H2 title = new H2(toDo.getDream());
 
-            dreams.add(title, new Hr());
+
+            dreams.add(title);
             dreams.addClassName("dreamCard");
             dreams.addClickListener(evt -> {
                 toDo.setDone(!toDo.isDone());
@@ -82,6 +88,7 @@ public class BucketlistView extends VerticalLayout {
                 .forEach(this::remove);
         loadProgressbar();
         renderDreams();
+
     }
 
     private void loadButtonLayout() {
@@ -104,15 +111,14 @@ public class BucketlistView extends VerticalLayout {
 
     private void loadNavbar() {
         Button logoutButton = new Button("Logout", new Icon(VaadinIcon.EXIT), evt -> PrincipalUtils.logout());
-        logoutButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        Image logo = new Image("./src/main/java/com/example/bucketlistapp/views/BucketlistView.java", "Logo");
+        /*Image logo = new Image("./src/main/java/com/example/bucketlistapp/image/logo_bucketlistDreams.jpg", "Logo");*/
         navbarLayout.addClassName("navbarLayout");
         navbarLayout.setWidthFull();
         navbarLayout.setMargin(true);
         navbarLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
         navbarLayout.setAlignItems(FlexComponent.Alignment.CENTER);
 
-        navbarLayout.add(logo, logoutButton);
+        navbarLayout.add(/*logo,*/ logoutButton);
     }
 
     private void loadProgressbar() {
@@ -121,7 +127,7 @@ public class BucketlistView extends VerticalLayout {
         progressBarLabel.setText("Dreams fulfilled ("+ checkedTodoList.toArray().length +"/" + userTodoList.toArray().length +")");
         progressBar.setValue((double) checkedTodoList.toArray().length/userTodoList.toArray().length);
         if(progressBar.getValue()==1){
-            progressBarLabel.setText("Fulfilled all of your dreams");
+            progressBarLabel.setText("All dreams fulfilled, now you can die happy!");
         }
     }
 

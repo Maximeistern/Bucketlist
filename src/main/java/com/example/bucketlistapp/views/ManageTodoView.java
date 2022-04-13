@@ -5,6 +5,7 @@ import com.example.bucketlistapp.security.PrincipalUtils;
 import com.example.bucketlistapp.services.ToDoService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.icon.Icon;
@@ -16,6 +17,7 @@ import com.vaadin.flow.router.Route;
 
 import javax.annotation.security.PermitAll;
 
+@CssImport("./Styles/styles.css")
 @Route("/managetodo")
 @PageTitle("BucketlistDreams || ManageDreams")
 @PermitAll
@@ -26,6 +28,7 @@ public class ManageTodoView extends VerticalLayout {
     public ManageTodoView(ToDoService toDoService){
         this.toDoService = toDoService;
         toDoForm = new ToDoForm(toDoService, this);
+        toDoForm.addClassName("todoForm");
         //setAlignItems(Alignment.CENTER);
         Button backButton = new Button("Back to dreams", evt -> {
             UI.getCurrent().navigate(BucketlistView.class);
