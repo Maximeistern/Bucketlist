@@ -52,6 +52,8 @@ html{
 
 /*-----------DreamCard------------*/
 .dreamCard{
+    font-family: "Square Peg", cursive;
+    letter-spacing: 3px;
     background: #b9b9ce;
     border-radius: 25px;
 /*    font-family: "";*/
@@ -72,15 +74,10 @@ html{
 }
 
 .dreamCard:hover{
-    background-image: linear-gradient(#2f2f2f, #919194, lightgrey);
+    background-image: linear-gradient(#2f2f2f, #919194, #d3d3d3);
     opacity: 80%;
 
 }
-
-/*.imageLogo{
-    height: 50px;
-    width: 70px;
-}*/
 
 
 /*-----------Buttons------------*/
